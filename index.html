@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Бюро аттестации — тренажёр HTML, CSS и Word</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏰%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#1d1713;--bg2:#2a211b;--pg:#ecdfc2;--pg2:#e0d0aa;--ink:#2b2018;--red:#8a2a2a;--gold:#c19a4b;--green:#3f5a3a;--mut:#6b5a45;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--pg);font:19px/1.55 "EB Garamond",Georgia,serif}
+h1,h2,h3{font-family:"Ruslan Display","EB Garamond",Georgia,serif;font-weight:400;line-height:1.15;margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:980px;margin:0 auto;padding:20px 20px 60px}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px;border-bottom:1px solid #4a3b2e}
+.logo{font-family:"Ruslan Display",serif;font-size:26px;color:var(--gold);background:none;border:0;padding:0}
+.nav{display:flex;gap:18px}.nav button{background:none;border:0;color:var(--pg);padding:6px 2px;border-bottom:1px solid transparent;transition:border-color .3s,color .3s}
+.nav button:hover{color:var(--gold);border-color:var(--gold)}
+#app{opacity:0}#app.enter{animation:in .6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero{padding:56px 0 36px}
+.hero h1{font-size:clamp(34px,6vw,60px);max-width:16ch}
+.hero h1 span{display:block;opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero h1 span:nth-child(2){animation-delay:.35s;color:var(--gold)}.hero h1 span:nth-child(3){animation-delay:.7s}
+@keyframes rise{from{opacity:0;transform:translateY(26px);letter-spacing:.06em}to{opacity:1;transform:none}}
+.hero p{max-width:56ch;color:#d4c5a5;margin:18px 0 26px}
+.btn{background:var(--red);color:var(--pg);border:2px solid var(--gold);border-radius:4px;padding:11px 26px;font-weight:700;letter-spacing:.02em;transition:transform .25s,background .25s}
+.btn:hover{transform:translateY(-2px);background:#a13333}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink)}.btn.alt:hover{background:rgba(43,32,24,.08)}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+.bar{height:10px;background:#3a2d23;border:1px solid #5a4733;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.sum{display:flex;gap:16px;align-items:center;margin:8px 0 34px}.sum .bar{flex:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--pg);color:var(--ink);border:3px double var(--mut);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-5px);box-shadow:0 14px 28px rgba(0,0,0,.45)}
+.card h3{font-size:28px;color:var(--red)}.card p{margin:0;flex:1}
+.card .bar{background:var(--pg2);border-color:var(--mut)}.card .bar i{background:var(--red)}
+.tag{font-size:15px;color:var(--mut)}
+.seal{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;align-items:center;justify-content:center;margin-left:8px;vertical-align:middle}
+.sec{margin-top:44px}.sec h2{font-size:30px;color:var(--gold);margin-bottom:10px}
+.sec p{max-width:62ch;color:#d4c5a5}
+.paper{background:var(--pg);color:var(--ink);border:3px double var(--mut);border-radius:6px;padding:24px;margin:16px 0}
+.paper h3{color:var(--red);font-size:26px;margin-bottom:8px}
+.paper>p:first-of-type::first-letter{font-family:"Ruslan Display",serif;font-size:2.4em;float:left;line-height:.9;padding:4px 8px 0 0;color:var(--red)}
+.tabs{display:flex;gap:8px;margin:22px 0 6px;flex-wrap:wrap}
+.tabs button{background:var(--bg2);color:var(--pg);border:1px solid #5a4733;border-radius:4px;padding:8px 18px;transition:background .3s,color .3s}
+.tabs button.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+pre{background:#251c15;color:#efe3c8;padding:14px;border-radius:4px;overflow-x:auto;margin:10px 0;font:15px/1.5 ui-monospace,Menlo,Consolas,monospace;tab-size:2}
+pre i{font-style:normal}.t{color:#e08a6a}.a{color:#d9b86a}.p{color:#8fbf8a}
+iframe{width:100%;height:190px;border:2px solid var(--mut);border-radius:4px;background:#fff;display:block}
+.lbl{font-size:15px;color:var(--mut);margin:10px 0 4px}
+textarea{width:100%;min-height:150px;background:#251c15;color:#efe3c8;border:2px solid var(--mut);border-radius:4px;padding:10px;font:15px/1.5 ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.pills button{background:var(--pg2);color:var(--ink);border:1px solid var(--mut);border-radius:20px;padding:4px 16px}
+.pills button.on{background:var(--ink);color:var(--pg)}.pills button.ok::after{content:" ✓";color:var(--green);font-weight:700}
+.pills button.on.ok::after{color:#9fd49a}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:720px){.cols{grid-template-columns:1fr}}
+#fb{min-height:1.6em;font-weight:700}#fb.good{color:var(--green)}#fb.bad{color:var(--red)}
+.tb{display:flex;gap:6px;flex-wrap:wrap;padding:8px;background:var(--pg2);border:1px solid var(--mut);border-radius:4px 4px 0 0}
+.tb button{background:#fff8e6;border:1px solid var(--mut);border-radius:3px;padding:3px 12px;color:var(--ink);transition:background .2s}.tb button:hover{background:#f3e3b8}
+#ed{background:#fffdf6;border:1px solid var(--mut);border-top:0;min-height:220px;padding:20px 28px;border-radius:0 0 4px 4px;outline:none}
+.q{margin:16px 0}.q b{display:block;margin-bottom:6px}.q label{display:block;padding:4px 0;cursor:pointer}
+.cert{background:var(--pg);color:var(--ink);border:8px double var(--red);padding:44px 28px;text-align:center;position:relative;margin:24px 0}
+.cert h2{font-size:clamp(30px,6vw,48px);color:var(--red)}.cert .nm{font-family:"Ruslan Display",serif;font-size:clamp(28px,5vw,42px);margin:16px 0;border-bottom:1px solid var(--mut);display:inline-block;padding:0 24px}
+.wax{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b03a3a,var(--red) 70%);color:var(--gold);font:34px "Ruslan Display",serif;display:flex;align-items:center;justify-content:center;margin:20px auto 0;box-shadow:0 4px 10px rgba(0,0,0,.4);animation:stamp .9s .3s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes stamp{from{transform:scale(2.2) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+input[type=text]{font:inherit;padding:9px 12px;border:2px solid var(--mut);border-radius:4px;background:#fff8e6;color:var(--ink);min-width:240px}
+.back{background:none;border:0;color:var(--gold);padding:0;margin-top:22px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important}}
+:root{--bg:#3a3b32;--bg2:#2c2d26;--pg:#d9d3b6;--pg2:#c9c2a0;--ink:#1e2429;--red:#b3261e;--gold:#e0c04a;--green:#2f6b34;--mut:#5b5a4a}
+body{font:17px/1.55 "Courier Prime","Courier New",monospace;background:var(--bg)}
+h1,h2,h3,.logo,.cert .nm,.wax{font-family:Oswald,Impact,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+header{border-bottom:4px solid var(--pg);padding-bottom:16px}
+.logo{color:var(--pg);font-size:24px;border-left:10px solid var(--red);padding-left:12px}
+.nav button{text-transform:uppercase;font-size:15px;letter-spacing:.06em}
+.hero h1{max-width:18ch}
+.hero p{color:var(--pg)}
+.card,.paper{border:2px solid var(--ink);border-radius:0;box-shadow:5px 5px 0 #1b1c16}
+.card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 #1b1c16}
+.card h3,.paper h3{color:var(--ink);border-bottom:3px solid var(--red);padding-bottom:6px}
+.paper>p:first-of-type::first-letter{font:inherit;float:none;padding:0;color:inherit}
+.btn{border-radius:0;border:2px solid #1b1c16;background:var(--red);color:#f3ecd3;text-transform:uppercase;letter-spacing:.06em;font-weight:700;box-shadow:3px 3px 0 #1b1c16;transition:transform .2s,box-shadow .2s}
+.btn:hover{background:var(--red);transform:translate(-2px,-2px);box-shadow:5px 5px 0 #1b1c16}
+.btn:active{transform:translate(2px,2px);box-shadow:0 0 0 #1b1c16}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink);box-shadow:none}
+.tabs button,.pills button,.tb button,input[type=text],textarea,iframe,#ed,.bar{border-radius:0}
+.tabs button{text-transform:uppercase;border:2px solid var(--pg);background:transparent}
+.tabs button.on{background:var(--pg);color:var(--ink)}
+.bar{border:2px solid var(--pg);background:var(--bg2);height:14px}
+.card .bar{border-color:var(--ink);background:var(--pg2)}
+.bar i{background:var(--gold)}
+.seal{width:auto;height:auto;border-radius:0;background:none;color:var(--green);border:2px solid var(--green);padding:0 8px;font-size:14px;transform:rotate(-6deg);animation:stamp .6s both}
+.seal::after{content:" ОДОБРЕНО"}
+.sec h2{color:var(--pg)}.sec p{color:var(--pg)}
+.tag{text-transform:uppercase;letter-spacing:.06em;font-size:14px}
+#fb{text-transform:uppercase;letter-spacing:.04em}
+#fb.good{animation:stamp .5s both}
+.pills button{border:2px solid var(--ink)}
+.cert{border:6px solid var(--ink);outline:3px solid var(--red);outline-offset:-14px;border-radius:0}
+.wax{width:auto;height:auto;border-radius:0;background:none;box-shadow:none;color:var(--green);border:6px solid var(--green);padding:6px 22px;font-size:34px;transform:rotate(-8deg)}
+:root{--bg:#34332a;--bg2:#23221b;--pg:#cfc9a1;--pg2:#b9b38a;--ink:#1d1a12;--red:#a3362a;--gold:#d2ab35;--green:#4a7a3a;--mut:#5f5a3e}
+body{font:19px/1.5 "Pixelify Sans","Courier New",monospace;background:var(--bg)}
+h1,h2,h3,.logo,.cert .nm,.wax{font-family:"Press Start 2P","Pixelify Sans",monospace;font-weight:400;letter-spacing:0;line-height:1.5}
+.hero h1{font-size:clamp(20px,4.2vw,34px);max-width:22ch}
+.card h3,.paper h3{font-size:16px}.sec h2{font-size:20px}.logo{font-size:14px}
+.cert h2{font-size:clamp(16px,3.4vw,26px)}.cert .nm{font-size:clamp(14px,3vw,22px)}.wax{font-size:15px}
+header{background:var(--bg2);padding:12px 14px;border:3px solid var(--pg2);border-bottom-width:6px}
+.card,.paper{background:var(--pg);border:3px solid var(--ink);box-shadow:4px 4px 0 #111}
+.btn{background:var(--green);color:#e9e4c4}.btn:hover{background:#5a8e48}
+.btn.alt{background:transparent;color:var(--ink)}
+pre,textarea{background:#1d1c15}
+.sec h2,.sec p,.hero p{color:var(--pg)}
+.nav button{font-size:16px}
+#app.enter{animation:slide .6s cubic-bezier(.2,.8,.2,1) forwards}
+#app.leave{opacity:0;transform:translateX(-36px);transition:opacity .22s ease-in,transform .22s ease-in}
+@keyframes slide{from{opacity:0;transform:translateX(48px) rotate(.6deg)}to{opacity:1;transform:none}}
+html,body{overflow-x:hidden}
+#app{opacity:1}
+#app.enter{animation:none}
+#app.leave{opacity:0;transition:opacity .18s}
+::view-transition-old(root){animation:vo .2s ease-in both}
+::view-transition-new(root){animation:vn .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes vo{to{opacity:0;transform:translateY(-6px)}}
+@keyframes vn{from{opacity:0;transform:translateY(14px)}}
+@keyframes pop{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#app.enter :is(.paper,.card,.cert){animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
+#app.enter :is(.paper,.card):nth-child(3){animation-delay:.07s}
+#app.enter :is(.paper,.card):nth-child(4){animation-delay:.14s}
+#app.enter :is(.paper,.card):nth-child(5){animation-delay:.21s}
+#app.enter :is(.paper,.card):nth-child(6){animation-delay:.28s}
+.tabs button{transition:background .25s,color .25s,transform .2s}.tabs button:hover{transform:translateY(-2px)}
+#shut{position:fixed;inset:0;z-index:50;background:repeating-linear-gradient(#2a291f 0 36px,#1a1912 36px 40px);transform:translateY(-101%);pointer-events:none;display:flex;align-items:center;justify-content:center;border-bottom:10px solid var(--pg2)}
+#shut b{font:400 clamp(13px,3vw,22px) "Press Start 2P",monospace;color:var(--red);background:var(--pg);border:4px solid var(--red);padding:14px 20px;transform:rotate(-4deg);opacity:0}
+#shut.down{transform:none;transition:transform .34s cubic-bezier(.7,0,.9,.5);pointer-events:auto}
+#shut.down b{opacity:1;transition:opacity .08s .28s}
+#shut.up{transform:translateY(-101%);transition:transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:auto}
+#shut.up b{opacity:1}
+#fx{position:fixed;inset:0;z-index:50;pointer-events:none;visibility:hidden}
+#fx.on{visibility:visible;pointer-events:auto}
+#fx>*{position:absolute;display:none}
+#fx b{display:block;left:50%;top:50%;font:400 clamp(13px,3vw,22px) "Press Start 2P",monospace;color:var(--red);background:var(--pg);border:4px solid var(--red);padding:14px 20px;white-space:nowrap;opacity:0;transform:translate(-50%,-50%) rotate(-4deg);z-index:3}
+#fx.in b{opacity:1;transition:opacity .08s .26s}
+#fx.out b{opacity:0;transition:opacity .2s}
+#fx.t-shut .a{display:block;inset:0;background:repeating-linear-gradient(#2a291f 0 36px,#1a1912 36px 40px);border-bottom:10px solid var(--pg2);transform:translateY(-101%)}
+#fx.t-shut.in .a{transform:none;transition:transform .34s cubic-bezier(.7,0,.9,.5)}
+#fx.t-shut.out .a{transition:transform .42s cubic-bezier(.2,.7,.2,1)}
+#fx.t-gates .a,#fx.t-gates .c{display:block;top:0;bottom:0;width:50.5%;background:repeating-linear-gradient(90deg,#2a291f 0 30px,#1a1912 30px 34px)}
+#fx.t-gates .a{left:0;border-right:8px solid var(--red);transform:translateX(-101%)}
+#fx.t-gates .c{right:0;border-left:8px solid var(--red);transform:translateX(101%)}
+#fx.t-gates.in .a,#fx.t-gates.in .c{transform:none;transition:transform .32s cubic-bezier(.6,0,.8,.4)}
+#fx.t-gates.out .a,#fx.t-gates.out .c{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+#fx.t-paper .a{display:block;inset:0;background:repeating-linear-gradient(var(--pg) 0 31px,var(--pg2) 31px 33px);border-left:10px solid var(--ink);transform:translateX(101%)}
+#fx.t-paper.in .a{transform:none;transition:transform .36s cubic-bezier(.3,.8,.3,1)}
+#fx.t-paper.out .a{transform:translateX(-101%);transition:transform .42s cubic-bezier(.6,0,.8,.4)}
+#fx.t-blinds s{display:block;left:0;right:0;height:12.6%;background:#2a291f;border-bottom:3px solid var(--pg2);transform:scaleY(0);transform-origin:top}
+#fx.t-blinds.in s{transform:scaleY(1);transition:transform .25s ease-out}
+#fx.t-blinds.out s{transform-origin:bottom;transition:transform .25s ease-in}
+#fx.t-stamp .a{display:block;inset:0;background:rgba(20,19,14,.6);opacity:0}
+#fx.t-stamp.in .a{opacity:1;transition:opacity .2s}
+#fx.t-stamp.out .a{transition:opacity .35s}
+#fx.t-stamp b{font-size:clamp(26px,8vw,64px);color:var(--green);border-color:var(--green);transform:translate(-50%,-50%) rotate(-9deg) scale(3)}
+#fx.t-stamp.in b{opacity:1;transform:translate(-50%,-50%) rotate(-9deg);transition:transform .2s cubic-bezier(.6,0,1,.5),opacity .05s}
+#fx.t-stamp.out b{transform:translate(-50%,-50%) rotate(-9deg);transition:opacity .35s}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><button class="logo" data-a="home">Бюро аттестации</button><nav class="nav"><button data-a="home">Главная</button><button data-a="cert">Сертификат</button><button data-a="snd">Звук: вкл</button></nav></header>
+<main id="app"></main>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+let S={t:{},q:{}};
+try{const r=JSON.parse(localStorage.getItem('scr')||'null');if(r)S=r}catch(e){}
+const save=()=>{try{localStorage.setItem('scr',JSON.stringify(S))}catch(e){}};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const hl=(s,css)=>{let r=esc(s);return css?r.replace(/([\w-]+)(\s*:)/g,'<i class=p>$1</i>$2'):r.replace(/(&lt;\/?)([\w-]+)/g,'$1<i class=t>$2</i>').replace(/\s([\w-]+)=/g,' <i class=a>$1</i>=')};
+
+const B=[
+{id:'html',name:'HTML',sub:'Отдел разметки',desc:'Научись строить каркас страницы: заголовки, ссылки, списки и таблицы.',
+lessons:[
+{t:'Структура документа',p:'HTML — язык разметки: с помощью тегов мы сообщаем браузеру, что перед ним заголовок, абзац или ссылка. Большинство тегов парные: открывающий <b>&lt;p&gt;</b> и закрывающий <b>&lt;/p&gt;</b>. Весь документ лежит внутри <b>&lt;html&gt;</b>; служебное — в <b>&lt;head&gt;</b>, видимое — в <b>&lt;body&gt;</b>.',code:'<html>\n  <head><title>Мой замок</title></head>\n  <body>\n    <h1>Добро пожаловать</h1>\n    <p>Это первый абзац.</p>\n  </body>\n</html>'},
+{t:'Заголовки, ссылки и списки',p:'<b>&lt;h1&gt;–&lt;h6&gt;</b> — заголовки от главного к мелкому. <b>&lt;a href="…"&gt;</b> создаёт ссылку, <b>&lt;img src="…" alt="…"&gt;</b> вставляет картинку, <b>&lt;ul&gt;</b> и <b>&lt;li&gt;</b> строят маркированный список, <b>&lt;table&gt;</b>, <b>&lt;tr&gt;</b>, <b>&lt;td&gt;</b> — таблицу.',code:'<h2>Гильдии</h2>\n<ul>\n  <li>Кузнецы</li>\n  <li>Писцы</li>\n</ul>\n<a href="https://example.com">Читать далее</a>'},{t:'Изображения и таблицы',p:'<b>&lt;img src="…" alt="…"&gt;</b> — одиночный тег: адрес файла в <b>src</b>, описание для тех, кто не видит картинку, в <b>alt</b>. Таблица состоит из строк <b>&lt;tr&gt;</b>, ячеек <b>&lt;td&gt;</b> и ячеек-заголовков <b>&lt;th&gt;</b>.',code:`<table border="1">
+  <tr><th>Отдел</th><th>Статус</th></tr>
+  <tr><td>HTML</td><td>Допущен</td></tr>
+</table>`},{t:'Формы и поля ввода',p:'<b>&lt;form&gt;</b> объединяет поля. <b>&lt;input type="text"&gt;</b> — текстовое поле, <b>type="email"</b> проверяет адрес почты, <b>&lt;label&gt;</b> подписывает поле, <b>&lt;button&gt;</b> отправляет форму.',code:`<form>
+  <label>Имя <input type="text"></label>
+  <label>Почта <input type="email"></label>
+  <button>Отправить</button>
+</form>`},{t:'Семантические элементы',p:'Теги <b>&lt;header&gt;</b>, <b>&lt;nav&gt;</b>, <b>&lt;main&gt;</b>, <b>&lt;section&gt;</b>, <b>&lt;footer&gt;</b> не меняют вид, но объясняют смысл блоков поисковикам и программам чтения с экрана. Вместо безликих <b>&lt;div&gt;</b> используйте их.',code:`<header>Бюро</header>
+<nav><a href="#">Главная</a></nav>
+<main><section>Новости</section></main>
+<footer>2026</footer>`}],
+tasks:[
+{t:'Создайте заголовок первого уровня, под ним абзац и ссылку на любой сайт.',h:'<!-- Пишите код здесь -->\n',hint:'Нужны теги h1 с текстом, p и a с атрибутом href.',ok:d=>d.querySelector('h1')&&d.querySelector('h1').textContent.trim()&&d.querySelector('p')&&d.querySelector('a[href]')},
+{t:'Постройте таблицу минимум из двух строк, добавьте маркированный список из трёх пунктов и картинку с атрибутом alt.',h:'',hint:'Проверьте: table с двумя tr, ul с тремя li, img с alt.',ok:d=>d.querySelectorAll('table tr').length>=2&&d.querySelectorAll('ul>li').length>=3&&d.querySelector('img[alt]')},{t:'Создайте форму: текстовое поле, поле для почты (type="email") и кнопку.',h:'',hint:'Нужны form, input type="text", input type="email" и button.',ok:d=>d.querySelector('form')&&d.querySelector('input[type=text]')&&d.querySelector('input[type=email]')&&d.querySelector('button')},{t:'Соберите страницу из семантических тегов: header, nav со ссылкой, main с section и footer.',h:'',hint:'Нужны header, nav a, main section и footer.',ok:d=>d.querySelector('header')&&d.querySelector('nav a')&&d.querySelector('main section')&&d.querySelector('footer')}],
+test:[{q:'Какой тег создаёт ссылку?',o:['<link>','<a>','<href>'],a:1},{q:'Где находится видимое содержимое страницы?',o:['в <head>','в <title>','в <body>'],a:2},{q:'Какой тег задаёт самый важный заголовок?',o:['<h1>','<h6>','<head>'],a:0},{q:'Какой атрибут <img> описывает картинку словами?',o:['title','alt','name'],a:1},{q:'Какой тег создаёт ячейку таблицы?',o:['<td>','<tb>','<cell>'],a:0},{q:'Какой тег подходит для нижней части страницы?',o:['<bottom>','<footer>','<end>'],a:1}]},
+{id:'css',name:'CSS',sub:'Отдел оформления',desc:'Раскрась страницу, расставь блоки и освой Flexbox — основу современной вёрстки.',
+lessons:[
+{t:'Селекторы и цвета',p:'CSS описывает, как выглядят элементы. Правило состоит из селектора и набора свойств в фигурных скобках. Селектор по тегу — <b>h1</b>, по классу — <b>.box</b>, по идентификатору — <b>#main</b>. Цвет текста задаёт <b>color</b>, фон — <b>background</b>.',css:1,code:'h1 { color: #8a2a2a; }\n.box {\n  background: #ecdfc2;\n  padding: 12px;\n  border: 2px solid #c19a4b;\n}',demo:'<h1>Заголовок</h1><div class="box">Блок</div>'},
+{t:'Flexbox',p:'Если задать контейнеру <b>display: flex</b>, его дочерние элементы выстраиваются в ряд. <b>justify-content</b> управляет расположением по главной оси, <b>align-items</b> — по поперечной. Два значения <b>center</b> ставят элемент ровно по центру.',css:1,code:'.stage {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 120px;\n}',demo:'<div class="stage"><b style="background:#c19a4b;padding:8px">Рыцарь</b></div>'},{t:'Отступы, границы и Box Model',p:'Каждый элемент — коробка: содержимое, <b>padding</b> (внутренний отступ), <b>border</b> (граница) и <b>margin</b> (внешний отступ). Ширина блока складывается из всех слоёв, если не задан <b>box-sizing: border-box</b>.',css:1,code:`.box {
+  padding: 16px;
+  border: 3px solid #1d1a12;
+  margin: 12px;
+  border-radius: 6px;
+}`,demo:'<div class="box">Коробка</div>'},{t:'CSS Grid',p:'<b>display: grid</b> строит сетку. <b>grid-template-columns: repeat(3, 1fr)</b> делит ширину на три равные колонки, <b>gap</b> задаёт промежутки.',css:1,code:`.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}`,demo:'<div class="grid"><div style="background:#d2ab35">1</div><div style="background:#d2ab35">2</div><div style="background:#d2ab35">3</div></div>'},{t:'Адаптивность и анимации',p:'Правило <b>@media (max-width: 600px)</b> меняет стили на узких экранах. Плавные изменения даёт <b>transition</b>, а <b>:hover</b> задаёт вид при наведении.',css:1,code:`.btn {
+  background: #4a7a3a;
+  transition: transform .3s;
+}
+.btn:hover { transform: scale(1.1); }`,demo:'<button class="btn" style="padding:10px">Наведи курсор</button>'}],
+tasks:[
+{t:'Задайте странице (body) цвет фона, а заголовку h1 — любой цвет, кроме чёрного.',h:'<h1>Королевский замок</h1>\n<p>Высокие башни и каменные стены.</p>',c:'/* Пишите стили здесь */\n',hint:'Используйте body { background: … } и h1 { color: … }.',ok:(d,w)=>w.getComputedStyle(d.body).backgroundColor!=='rgba(0, 0, 0, 0)'&&w.getComputedStyle(d.querySelector('h1')).color!=='rgb(0, 0, 0)'},
+{t:'Расположите .box по центру .stage — и по горизонтали, и по вертикали — с помощью Flexbox.',h:'<div class="stage">\n  <div class="box">Рыцарь</div>\n</div>',c:'.stage{height:200px;border:2px dashed #888}\n.box{width:100px;padding:10px;background:#c19a4b}\n',hint:'Для .stage нужны display: flex, justify-content: center и align-items: center.',ok:(d,w)=>{const c=w.getComputedStyle(d.querySelector('.stage'));return c.display==='flex'&&c.justifyContent==='center'&&c.alignItems==='center'}},{t:'Оформите карточку .card: внутренний отступ не меньше 10px, рамка и скруглённые углы.',h:'<div class="card">Карточка</div>',c:'/* стили */',hint:'Нужны padding, border и border-radius.',ok:(d,w)=>{const c=w.getComputedStyle(d.querySelector('.card'));return parseFloat(c.paddingTop)>=10&&parseFloat(c.borderTopWidth)>=1&&parseFloat(c.borderTopLeftRadius)>0}},{t:'Сделайте из .grid сетку из трёх колонок с промежутком между ячейками.',h:'<div class="grid"><div>1</div><div>2</div><div>3</div></div>',c:'/* стили */',hint:'display: grid, grid-template-columns: repeat(3, 1fr) и gap.',ok:(d,w)=>{const c=w.getComputedStyle(d.querySelector('.grid'));return c.display==='grid'&&c.gridTemplateColumns.trim().split(/\s+/).length===3&&parseFloat(c.columnGap)>0}}],
+test:[{q:'Как выбрать элемент по классу «card»?',o:['#card','.card','card()'],a:1},{q:'Какое свойство меняет цвет текста?',o:['color','text-color','font-paint'],a:0},{q:'Что делает display: flex?',o:['Скрывает элемент','Выстраивает дочерние элементы гибкой раскладкой','Добавляет анимацию'],a:1},{q:'Какое свойство задаёт внутренний отступ?',o:['margin','padding','gap'],a:1},{q:'Что делает grid-template-columns: repeat(3, 1fr)?',o:['Три равные колонки','Три строки','Три анимации'],a:0},{q:'Какое правило применяет стили на узких экранах?',o:['@media','@screen-small',':narrow'],a:0}]},
+{id:'word',name:'Microsoft Word',sub:'Отдел документов',desc:'Оформляй документы: заголовки, выравнивание, выделение и списки.',
+lessons:[
+{t:'Форматирование текста',p:'Выделите текст мышью и примените оформление на вкладке «Главная». Полужирный — <b>Ctrl+B</b>, курсив — <b>Ctrl+I</b>, подчёркивание — <b>Ctrl+U</b>. Выравнивание по центру — <b>Ctrl+E</b>, по левому краю — <b>Ctrl+L</b>. Не злоупотребляйте: выделяйте только главное.'},
+{t:'Стили и списки',p:'Заголовки лучше оформлять не вручную, а готовыми <b>стилями</b> («Заголовок 1», «Заголовок 2»): так документ получает структуру, а оглавление собирается автоматически. Для перечислений используйте <b>маркированный</b> или <b>нумерованный</b> список — кнопки рядом со шрифтом.'},{t:'Страница и поля',p:'Вкладка «Макет» задаёт параметры страницы: <b>поля</b>, ориентацию (книжная или альбомная) и размер бумаги. Стандартные поля для деловых документов — 2 см сверху и снизу, 3 см слева, 1,5 см справа.'},{t:'Таблицы',p:'«Вставка» → «Таблица» создаёт сетку из строк и столбцов. Выделяйте ячейки, чтобы объединять их, менять границы и заливку. Таблица нужна для данных, а не для расположения текста на странице.'},{t:'Нумерация и оглавление',p:'Номера страниц добавляются через «Вставка» → «Номер страницы». Если все заголовки оформлены стилями, оглавление создаётся одной командой: «Ссылки» → «Оглавление».'}],
+tasks:[{w:1,t:'Превратите первую строку в заголовок («Заголовок»), выровняйте её по центру, выделите любую строку полужирным и сделайте из трёх правил маркированный список.',h:'<div>Устав гильдии</div><div>Правило первое</div><div>Правило второе</div><div>Правило третье</div>',hint:'Выделите строки и нажимайте кнопки панели: «Заголовок», «По центру», «Ж», «Список».',ok:e=>{const h=e.querySelector('h1,h2');return h&&getComputedStyle(h).textAlign==='center'&&e.querySelector('b,strong')&&e.querySelectorAll('li').length>=3}},{w:1,t:'Сделайте нумерованный список из трёх последних строк и выделите любую строку курсивом.',h:'<div>Порядок приёма</div><div>Проверить документы</div><div>Поставить штамп</div><div>Выдать результат</div>',hint:'Выделите три строки и нажмите «Нумерация», затем «К».',ok:e=>e.querySelectorAll('ol li').length>=3&&e.querySelector('i,em')},{w:1,t:'Выровняйте последнюю строку по правому краю и подчеркните любое слово.',h:'<div>Заявление</div><div>Прошу выдать допуск</div><div>Подпись</div>',hint:'Поставьте курсор в последнюю строку, нажмите «По правому краю», затем «Ч» на выделенном слове.',ok:e=>getComputedStyle(e.lastElementChild).textAlign==='right'&&e.querySelector('u')}],
+test:[{q:'Какое сочетание делает текст полужирным?',o:['Ctrl+B','Ctrl+P','Ctrl+S'],a:0},{q:'Зачем применять стили заголовков?',o:['Чтобы изменить цвет страницы','Чтобы документ получил структуру и оглавление','Чтобы увеличить поля'],a:1},{q:'Какое действие выравнивает текст по центру?',o:['Ctrl+E','Ctrl+Z','Ctrl+N'],a:0},{q:'Где в Word задаются поля страницы?',o:['Вкладка «Макет»','Вкладка «Рецензирование»','Вкладка «Вид»'],a:0},{q:'Для чего нужна таблица?',o:['Для данных в строках и столбцах','Для смены шрифта','Для печати'],a:0},{q:'Что нужно для автоматического оглавления?',o:['Стили заголовков','Рамка страницы','Колонтитул'],a:0}]}
+];
+
+const units=B.reduce((n,b)=>n+b.tasks.length+1,0);
+const doneN=()=>B.reduce((n,b)=>n+b.tasks.filter((_,i)=>S.t[b.id+i]).length+(S.q[b.id]?1:0),0);
+const bd=b=>b.tasks.every((_,i)=>S.t[b.id+i])&&S.q[b.id];
+const bp=b=>Math.round((b.tasks.filter((_,i)=>S.t[b.id+i]).length+(S.q[b.id]?1:0))/(b.tasks.length+1)*100);
+const all=()=>B.every(bd);
+let v={view:'home',tab:'theory',task:0,name:''};
+const app=$('#app');
+
+let snd=true,AC;
+const sfx=n=>{if(!snd)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;
+const tone=(f,d,ty,v,s,f2)=>{s=s||0;const o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.setValueAtTime(f,t+s);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+s+d);g.gain.setValueAtTime(v,t+s);g.gain.exponentialRampToValueAtTime(.001,t+s+d);o.connect(g);g.connect(AC.destination);o.start(t+s);o.stop(t+s+d)};
+const noise=(d,v,fq,o)=>{o=o||0;const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;const s=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;fl.type='bandpass';fl.frequency.value=fq;g.gain.setValueAtTime(v,t+o);g.gain.exponentialRampToValueAtTime(.001,t+o+d);s.connect(fl);fl.connect(g);g.connect(AC.destination);s.start(t+o)};
+({click:()=>tone(900+Math.random()*500,.04,'square',.04),shut:()=>{noise(.18,.5,250);tone(70,.25,'square',.12,0,45)},gate:()=>{tone(60,.18,'square',.2,0,40);tone(55,.2,'square',.2,.14,38);noise(.35,.2,3200)},rustle:()=>{noise(.35,.35,2600);noise(.2,.25,1500,.12)},type:()=>{noise(.04,.6,3500);noise(.04,.6,3000,.09);noise(.04,.6,3800,.18);tone(1500,.25,'sine',.04,.28)},bell:()=>{tone(1318,.6,'sine',.12);tone(1760,.5,'sine',.06,.01)},ratchet:()=>{for(let i=0;i<8;i++)tone(1400+i*60,.02,'square',.04,i*.035)},swish:()=>noise(.22,.3,1600),stamp:()=>{tone(80+Math.random()*30,.2,'sine',.6,0,38);noise(.1,.5,300+Math.random()*150)},ok:()=>{const q=[660,740,587][Math.random()*3|0];tone(q,.09,'square',.05);tone(q*1.33,.16,'square',.05,.1)},no:()=>Math.random()<.5?tone(150,.4,'sawtooth',.09,0,95):(tone(220,.12,'sawtooth',.09),tone(160,.3,'sawtooth',.09,.14))})[n]()}catch(e){}};
+let first=1;
+function draw(){
+  if(first||matchMedia('(prefers-reduced-motion:reduce)').matches){first=0;return render()}
+  if(draw.b)return;draw.b=1;
+  const T=['shut','gates','paper','blinds','stamp'],L={shut:'Проверка документов',gates:'Следующий!',paper:'Заполняется бланк',blinds:'Идёт проверка',stamp:'Одобрено'},M={shut:['shut','stamp'],gates:['gate','bell'],paper:['rustle','type'],blinds:['ratchet','ok'],stamp:['','ok']};
+  let t;do{t=T[Math.random()*5|0]}while(t===draw.l);draw.l=t;
+  let f=$('#fx');if(!f){f=document.createElement('div');f.id='fx';document.body.appendChild(f)}
+  f.innerHTML='<i class=a></i><i class=c></i>'+Array.from({length:8},(_,i)=>`<s style="top:${i*12.5}%;transition-delay:${i*35}ms"></s>`).join('')+'<b>'+L[t]+'</b>';
+  f.className='on t-'+t;void f.offsetWidth;f.classList.add('in');
+  sfx(M[t][0]);
+  if(t==='stamp')setTimeout(()=>{sfx('stamp');app.animate([{transform:'translate(0)'},{transform:'translate(-7px,5px)'},{transform:'translate(6px,-4px)'},{transform:'none'}],{duration:240})},190);
+  setTimeout(()=>{render();sfx(M[t][1])},380);
+  setTimeout(()=>{f.classList.remove('in');f.classList.add('out')},800);
+  setTimeout(()=>{f.className='';draw.b=0},1250);
+}
+function render(){
+  app.classList.remove('enter');
+  app.innerHTML=v.view==='home'?home():v.view==='cert'?cert():block();
+  void app.offsetWidth;app.classList.add('enter');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('[data-w]').forEach(e=>e.style.width=e.dataset.w+'%')));
+  if(v.view==='block'&&v.tab==='practice')run();
+  scrollTo({top:0});
+}
+const go=(view,tab)=>{v.view=view;v.tab=tab||'theory';v.task=0;draw()};
+
+function home(){
+  const pr=Math.round(doneN()/units*100),nxt=B.find(b=>!bd(b))||B[0];
+  return `<section class="hero"><h1><span>Освой цифровые навыки.</span><span>Пройди проверку.</span><span>Получи сертификат.</span></h1>
+<p>Три отдела, живой редактор с мгновенным результатом, проверка заданий и экзамены. Пройди все три — и получишь сертификат допуска. Документы, пожалуйста.</p>
+<button class="btn" data-a="block" data-b="${nxt.id}">Начать обучение</button></section>
+<div class="sum"><span>Общий путь: ${pr}%</span><div class="bar"><i data-w="${pr}"></i></div></div>
+<div class="grid">${B.map(b=>`<article class="card"><span class="tag">${b.sub}</span><h3>${b.name}${bd(b)?'<span class="seal">✓</span>':''}</h3><p>${b.desc}</p><div class="bar"><i data-w="${bp(b)}"></i></div><button class="btn" data-a="block" data-b="${b.id}">${bp(b)?'Продолжить':'Подать документы'}</button></article>`).join('')}</div>
+<section class="sec"><h2>Как получить сертификат</h2><p>Сертификат допуска выдаётся после выполнения всех заданий и сдачи экзамена в каждом из трёх отделов: HTML, CSS и Word. Экзамен сдан при двух верных ответах из трёх. Прогресс сохраняется в твоём браузере.</p></section>`;
+}
+
+function block(){
+  const b=B.find(x=>x.id===v.b),tabs=[['theory','Теория'],['practice','Практика'],['test','Экзамен']];
+  return `<button class="back" data-a="home">← К отделам</button>
+<h2 style="font-size:40px;margin-top:10px">${b.name}</h2>
+<div class="tabs">${tabs.map(([k,n])=>`<button class="${v.tab===k?'on':''}" data-a="tab" data-t="${k}">${n}</button>`).join('')}</div>
+${v.tab==='theory'?theory(b):v.tab==='practice'?practice(b):test(b)}`;
+}
+const theory=b=>b.lessons.map((l,i)=>`<article class="paper"><h3>${i+1}. ${l.t}</h3><p>${l.p}</p>${l.code?`<pre>${hl(l.code,l.css)}</pre><div class="lbl">Результат</div><iframe sandbox="allow-same-origin" title="Результат" srcdoc="${esc((l.css?'<style>'+l.code+'</style>'+l.demo:l.code).replace(/"/g,'&quot;'))}"></iframe>`:''}</article>`).join('');
+
+function practice(b){
+  const t=b.tasks[v.task];
+  const pills=`<div class="row pills">${b.tasks.map((_,i)=>`<button class="${i===v.task?'on':''} ${S.t[b.id+i]?'ok':''}" data-a="task" data-i="${i}">Задание ${i+1}</button>`).join('')}</div>`;
+  const btns=`<div class="row"><button class="btn" data-a="run">Запустить</button><button class="btn alt" data-a="reset">Сбросить</button><button class="btn" data-a="check">Проверить</button></div><div id="fb" aria-live="polite"></div>`;
+  if(t.w)return `<div class="paper">${pills}<p><b>Задача.</b> ${t.t}</p><div class="tb"><button data-c="bold"><b>Ж</b></button><button data-c="italic"><i>К</i></button><button data-c="underline"><u>Ч</u></button><button data-c="formatBlock" data-x="h1">Заголовок</button><button data-c="justifyCenter">По центру</button><button data-c="insertUnorderedList">Список</button><button data-c="insertOrderedList">Нумерация</button><button data-c="justifyRight">По правому краю</button></div><div id="ed" contenteditable="true" spellcheck="false">${t.h}</div><div class="row"><button class="btn alt" data-a="reset">Сбросить</button><button class="btn" data-a="check">Проверить</button></div><div id="fb" aria-live="polite"></div></div>`;
+  return `<div class="paper">${pills}<p><b>Задача.</b> ${t.t}</p><div class="cols"><div><div class="lbl">HTML</div><textarea id="h" spellcheck="false">${esc(t.h)}</textarea>${t.c!=null?`<div class="lbl">CSS</div><textarea id="c" spellcheck="false">${esc(t.c)}</textarea>`:''}${btns}</div><div><div class="lbl">Результат</div><iframe id="pv" style="height:340px" sandbox="allow-same-origin" title="Предпросмотр"></iframe></div></div></div>`;
+}
+const cur=()=>B.find(x=>x.id===v.b).tasks[v.task];
+const sd=()=>`<style>body{font-family:Georgia,serif;padding:12px;color:#222}${$('#c')?$('#c').value:''}</style>${$('#h').value}`;
+function run(){const f=$('#pv');if(f)f.srcdoc=sd()}
+function fb(ok){
+  const t=cur(),k=v.b+v.task,e=$('#fb');
+  if(ok){S.t[k]=true;save();sfx('stamp');setTimeout(()=>sfx('ok'),260);e.className='good';e.textContent='Одобрено. Задание выполнено.';
+    document.querySelectorAll('.pills button')[v.task].classList.add('ok')}
+  else{sfx('no');e.className='bad';e.textContent='Отказано. '+t.hint}
+}
+function check(){
+  const t=cur();
+  if(t.w)return fb(!!t.ok($('#ed')));
+  const f=$('#pv');f.onload=()=>{let r=false;try{r=!!t.ok(f.contentDocument,f.contentWindow)}catch(e){}fb(r)};f.srcdoc=sd();
+}
+
+function test(b){
+  const done=S.q[b.id];
+  return `<div class="paper"><h3>Экзамен отдела</h3><p>${done?'Экзамен сдан. Можно пересдать для практики.':'Для сдачи нужно минимум 4 верных ответа из 6.'}</p>
+<form id="tf">${b.test.map((q,i)=>`<div class="q"><b>${i+1}. ${esc(q.q)}</b>${q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>`).join('')}
+<button class="btn" type="button" data-a="submit">Сдать экзамен</button></form><p id="fb" style="font-weight:700" aria-live="polite"></p></div>`;
+}
+function submit(){
+  const b=B.find(x=>x.id===v.b);let n=0;
+  b.test.forEach((q,i)=>{const r=document.querySelector(`input[name=q${i}]:checked`);if(r&&+r.value===q.a)n++});
+  const e=$('#fb');
+  if(n>=Math.ceil(b.test.length*.66)){S.q[b.id]=true;save();sfx('stamp');setTimeout(()=>sfx('ok'),260);e.className='good';e.textContent=`Верно: ${n} из ${b.test.length}. Экзамен сдан. Одобрено.`}
+  else{sfx('no');e.className='bad';e.textContent=`Верно: ${n} из ${b.test.length}. Отказано. Изучите материалы и повторите.`}
+}
+
+function cert(){
+  if(!all()){const left=units-doneN();return `<section class="hero"><h1 style="font-size:40px">Сертификат не выдан</h1><p>Выполните все задания и сдайте экзамены в трёх отделах. Осталось шагов: ${left}.</p><div class="bar" style="max-width:420px"><i data-w="${Math.round(doneN()/units*100)}"></i></div><p><button class="btn" data-a="home">К отделам</button></p></section>`}
+  if(!v.name)return `<section class="hero"><h1 style="font-size:40px">Все отделы пройдены</h1><p>Впишите имя для оформления сертификата.</p><div class="row"><input type="text" id="nm" placeholder="Ваше имя" aria-label="Ваше имя"><button class="btn" data-a="name">Оформить</button></div></section>`;
+  const d=new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+  return `<div class="cert"><h2>Сертификат допуска</h2><p>Бюро аттестации удостоверяет, что</p><div class="nm">${esc(v.name)}</div><p>успешно прошёл(ла) обучение по отделам HTML, CSS и Microsoft Word,<br>выполнил(а) все задания и сдал(а) экзамены.</p><p class="tag">${d}</p><div class="wax">Допуск одобрен</div></div>`;
+}
+
+document.addEventListener('click',e=>{
+  const x=e.target.closest('[data-a],[data-c]');if(!x)return;
+  if(x.dataset.c){document.execCommand(x.dataset.c,false,x.dataset.x||null);return}
+  const a=x.dataset.a;if(a!=='snd')sfx('click');
+  if(a==='snd'){snd=!snd;x.textContent='Звук: '+(snd?'вкл':'выкл')}
+  else if(a==='home')go('home');
+  else if(a==='cert')go('cert');
+  else if(a==='block'){v.b=x.dataset.b;go('block','theory')}
+  else if(a==='tab'){v.tab=x.dataset.t;v.task=0;draw()}
+  else if(a==='task'){v.task=+x.dataset.i;render()}
+  else if(a==='run')run();
+  else if(a==='reset'){render()}
+  else if(a==='check')check();
+  else if(a==='submit')submit();
+  else if(a==='name'){const n=$('#nm').value.trim();if(n){v.name=n;draw();setTimeout(()=>sfx('stamp'),800)}}
+});
+document.addEventListener('mousedown',e=>{if(e.target.closest('.tb button'))e.preventDefault()});
+document.addEventListener('input',e=>{if(e.target.matches('#h,#c'))run()});
+draw();
+</script>
+</body>
+</html>
